@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion';
 import { Image } from '@/components/ui/image';
-import { ArrowRight, Star, Award, Gift } from 'lucide-react';
+import { ArrowRight, Star, Award, Gift, ShoppingBag, Heart, Cake, Users } from 'lucide-react';
 
 // --- UTILITY COMPONENTS ---
 
@@ -171,7 +171,13 @@ export default function HomePage() {
                     <div className="aspect-[3/4] relative overflow-hidden">
                       <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
                       <Image
-                        src={'https://static.wixstatic.com/media/b1c664_432c0450ce3741d0a87ee8124c036870~mv2.png?originWidth=576&originHeight=768'}
+                        src={
+                          card.id === 'hero-card-1' 
+                            ? 'https://static.wixstatic.com/media/b1c664_3881caec9b494737bc9553f55e08d37a~mv2.png?originWidth=576&originHeight=768'
+                            : card.id === 'hero-card-2'
+                            ? 'https://static.wixstatic.com/media/b1c664_0774c5ba24884401b727c217592fa3fd~mv2.png?originWidth=576&originHeight=768'
+                            : 'https://static.wixstatic.com/media/b1c664_b4a00d834eac4cd6a34f6c8cad760dec~mv2.png?originWidth=576&originHeight=768'
+                        }
                         alt={card.title}
                         width={600}
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
@@ -371,6 +377,140 @@ export default function HomePage() {
             </span>
           </Link>
         </AnimatedElement>
+      </section>
+
+      {/* --- WHAT WE OFFER SECTION --- */}
+      <section className="w-full py-32 bg-black px-6">
+        <div className="max-w-[120rem] mx-auto">
+          <AnimatedElement className="mb-24 text-center">
+            <h2 className="font-heading text-5xl md:text-6xl mb-6 text-white">What We Offer</h2>
+            <div className="w-px h-12 bg-white/30 mx-auto" />
+          </AnimatedElement>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { title: "Daily Sales", desc: "Fresh sweets prepared daily for your everyday indulgence", icon: ShoppingBag, id: "offer-1" },
+              { title: "Bulk Orders", desc: "Perfect for corporate events and large gatherings", icon: Users, id: "offer-2" },
+              { title: "Gifting", desc: "Beautifully packaged sweets for your loved ones", icon: Heart, id: "offer-3" },
+              { title: "Customization", desc: "Create custom sweet assortments for special needs", icon: Gift, id: "offer-4" }
+            ].map((offer, idx) => (
+              <AnimatedElement key={offer.id} delay={idx * 100}>
+                <div className="group relative bg-zinc-900 p-8 rounded-2xl hover:bg-zinc-800 transition-colors duration-300 h-full flex flex-col">
+                  <div className="mb-6 inline-block p-4 rounded-full bg-white/10 group-hover:bg-white/20 transition-colors duration-300">
+                    <offer.icon className="w-8 h-8 text-white" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="font-heading text-2xl mb-3 text-white">{offer.title}</h3>
+                  <p className="font-paragraph text-zinc-400 leading-relaxed flex-grow">{offer.desc}</p>
+                  <div className="mt-6 pt-6 border-t border-white/10">
+                    <Link to="/store" className="inline-flex items-center gap-2 text-white hover:text-zinc-300 transition-colors">
+                      Learn More <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              </AnimatedElement>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- SPECIAL OCCASIONS SECTION --- */}
+      <section className="w-full py-16 px-6 bg-zinc-950">
+        <div className="max-w-[120rem] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Marriage Banner */}
+            <AnimatedElement>
+              <div className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer">
+                <Image
+                  src="https://static.wixstatic.com/media/b1c664_ae38b408f9cf4de192c443d39f2e0c67~mv2.png?originWidth=1152&originHeight=576"
+                  alt="Marriage bulk orders - wedding sweets collection"
+                  width={600}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <h3 className="font-heading text-4xl md:text-5xl text-white mb-4">Marriage</h3>
+                  <p className="font-paragraph text-lg text-white/90 mb-6">Bulk orders for your special day</p>
+                  <Link to="/store" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-paragraph hover:bg-zinc-200 transition-colors">
+                    Order Now <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </AnimatedElement>
+
+            {/* Birthday Banner */}
+            <AnimatedElement delay={100}>
+              <div className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer">
+                <Image
+                  src="https://static.wixstatic.com/media/b1c664_04532d10d1474aa0a94698d39ff23d29~mv2.png?originWidth=1152&originHeight=576"
+                  alt="Birthday bulk orders - celebration sweets"
+                  width={600}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <h3 className="font-heading text-4xl md:text-5xl text-white mb-4">Birthday</h3>
+                  <p className="font-paragraph text-lg text-white/90 mb-6">Celebrate with our sweet collections</p>
+                  <Link to="/store" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-paragraph hover:bg-zinc-200 transition-colors">
+                    Order Now <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </AnimatedElement>
+          </div>
+        </div>
+      </section>
+
+      {/* --- TESTIMONIALS SECTION --- */}
+      <section className="w-full py-32 bg-black px-6">
+        <div className="max-w-[120rem] mx-auto">
+          <AnimatedElement className="mb-24 text-center">
+            <h2 className="font-heading text-5xl md:text-6xl mb-6 text-white">What Our Customers Say</h2>
+            <div className="w-px h-12 bg-white/30 mx-auto" />
+          </AnimatedElement>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Priya Sharma",
+                role: "Wedding Planner",
+                review: "Al Kata Sweet provided the most authentic and delicious sweets for our wedding. Our guests couldn't stop raving about them!",
+                rating: 5,
+                id: "testimonial-1"
+              },
+              {
+                name: "Rajesh Kumar",
+                role: "Corporate Event Manager",
+                review: "Perfect for our office celebrations. The bulk orders were handled professionally and the quality was exceptional.",
+                rating: 5,
+                id: "testimonial-2"
+              },
+              {
+                name: "Anjali Patel",
+                role: "Homemaker",
+                review: "I gift Al Kata sweets to all my friends and family. The traditional flavors and beautiful packaging make every occasion special.",
+                rating: 5,
+                id: "testimonial-3"
+              }
+            ].map((testimonial, idx) => (
+              <AnimatedElement key={testimonial.id} delay={idx * 100}>
+                <div className="bg-zinc-900 p-8 rounded-2xl hover:bg-zinc-800 transition-colors duration-300">
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="font-paragraph text-zinc-300 mb-6 leading-relaxed italic">
+                    "{testimonial.review}"
+                  </p>
+                  <div className="border-t border-white/10 pt-6">
+                    <p className="font-heading text-lg text-white">{testimonial.name}</p>
+                    <p className="font-paragraph text-sm text-zinc-500">{testimonial.role}</p>
+                  </div>
+                </div>
+              </AnimatedElement>
+            ))}
+          </div>
+        </div>
       </section>
 
     </div>
