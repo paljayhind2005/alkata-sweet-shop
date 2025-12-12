@@ -10,6 +10,7 @@ import {
 
 import React from 'react';
 import { useNavigation } from '../NavigationContext';
+import { getProductImageUrl } from '@/lib/product-images';
 
 import {
   ProductCompareAtPrice,
@@ -169,12 +170,30 @@ export const ProductListWrapper: React.FC<ProductListProps> = ({
                       {/* Product Ribbon */}
                       <ProductRibbon />
                       <CardContent className="p-4 pb-0">
-                        {/* Product Image */}
-                        <div className="aspect-square bg-surface-primary rounded-lg mb-4 overflow-hidden relative">
-                          <ProductMediaGallery>
-                            <StyledMediaGallery.Viewport className="object-cover group-hover:scale-110 transition-transform duration-300" />
-                          </ProductMediaGallery>
-                        </div>
+                        {/* Product Image with Fallback */}
+                        <ProductSlug asChild>
+                          {({ slug }) => {
+                            // Get product name from context for fallback image
+                            const productName = slug?.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') || '';
+                            const fallbackImage = getProductImageUrl(productName);
+                            
+                            return (
+                              <div 
+                                className="aspect-square bg-surface-primary rounded-lg mb-4 overflow-hidden relative"
+                                style={{
+                                  backgroundImage: `url(${fallbackImage})`,
+                                  backgroundSize: 'cover',
+                                  backgroundPosition: 'center',
+                                  backgroundRepeat: 'no-repeat'
+                                }}
+                              >
+                                <ProductMediaGallery>
+                                  <StyledMediaGallery.Viewport className="object-cover group-hover:scale-110 transition-transform duration-300" />
+                                </ProductMediaGallery>
+                              </div>
+                            );
+                          }}
+                        </ProductSlug>
 
                         {/* Product Title */}
                         <ProductSlug asChild>

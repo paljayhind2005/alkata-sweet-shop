@@ -40,6 +40,7 @@ import { SocialSharingButtons } from '../social/SocialSharingButtons';
 import { useNavigation } from '../NavigationContext';
 
 import * as StyledMediaGallery from '@/components/ui/media/MediaGallery';
+import { getProductImageUrl } from '@/lib/product-images';
 
 export default function ProductDetails({
   isQuickView = false,
@@ -49,6 +50,7 @@ export default function ProductDetails({
   product: productsV3.V3Product;
 }) {
   const Navigation = useNavigation();
+  const fallbackImage = getProductImageUrl(product?.name);
 
   return (
     <Product product={product}>
@@ -58,8 +60,16 @@ export default function ProductDetails({
       >
         {/* Product Images */}
         <div className="space-y-4">
-          {/* Main Image */}
-          <div className="aspect-square bg-surface-primary rounded-2xl overflow-hidden border border-brand-subtle relative">
+          {/* Main Image with Fallback */}
+          <div 
+            className="aspect-square bg-surface-primary rounded-2xl overflow-hidden border border-brand-subtle relative"
+            style={{
+              backgroundImage: `url(${fallbackImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
             <StyledMediaGallery.Viewport />
             <StyledMediaGallery.Previous />
             <StyledMediaGallery.Next />
