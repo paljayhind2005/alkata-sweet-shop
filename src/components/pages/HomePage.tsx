@@ -337,14 +337,20 @@ export default function HomePage() {
 
         {/* Marquee-like Gallery */}
         <div className="flex gap-8 px-6 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide">
-          {[1, 2, 3, 4].map((item) => (
-            <div key={item} className="flex-none w-[85vw] md:w-[40vw] lg:w-[25vw] snap-center">
+          {[
+            { name: "Rasgulla", price: "$18.00", image: "https://static.wixstatic.com/media/b1c664_16f2c15541e745b6b1a8f522fccd1569~mv2.png?originWidth=576&originHeight=768" },
+            { name: "Kheer", price: "$16.00", image: "https://static.wixstatic.com/media/b1c664_1c39759d044c4e229fe82c0c2b002e92~mv2.png?originWidth=576&originHeight=768" },
+            { name: "Laddu", price: "$14.00", image: "https://static.wixstatic.com/media/b1c664_e84130862ea64c25ac31f7a6c0f0fba7~mv2.png?originWidth=576&originHeight=768" },
+            { name: "Halwa", price: "$20.00", image: "https://static.wixstatic.com/media/b1c664_f2a6762b7f2b49c89192b22ce25932e5~mv2.png?originWidth=576&originHeight=768" },
+            { name: "Peda", price: "$15.00", image: "https://static.wixstatic.com/media/b1c664_af4abade60e84c359265fbd4887add4b~mv2.png?originWidth=576&originHeight=768" }
+          ].map((item) => (
+            <div key={item.name} className="flex-none w-[85vw] md:w-[40vw] lg:w-[25vw] snap-center">
               <Link to="/store" className="group block">
                 <div className="aspect-[3/4] relative overflow-hidden rounded-lg mb-6">
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors z-10" />
                   <Image
-                    src={'https://static.wixstatic.com/media/b1c664_54c54491496f40cb8561263534b96e98~mv2.png?originWidth=576&originHeight=768'}
-                    alt={`Collection item ${item}`}
+                    src={item.image}
+                    alt={item.name}
                     width={600}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
@@ -352,8 +358,8 @@ export default function HomePage() {
                     <span className="bg-white text-black px-4 py-2 text-sm font-paragraph uppercase tracking-wider">Shop Now</span>
                   </div>
                 </div>
-                <h3 className="font-heading text-2xl group-hover:italic transition-all">Seasonal Selection {item}</h3>
-                <p className="font-paragraph text-zinc-500">$24.00</p>
+                <h3 className="font-heading text-2xl group-hover:italic transition-all">{item.name}</h3>
+                <p className="font-paragraph text-zinc-500">{item.price}</p>
               </Link>
             </div>
           ))}
